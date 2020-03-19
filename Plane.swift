@@ -16,7 +16,7 @@ struct  Plane: Identifiable {
 
 extension Plane {
     static let demoPlanes = [
-        Plane(title: "Boieng", imageName: "Boeing"),
+        Plane(title: "Boeing", imageName: "Boeing"),
         Plane(title: "Airbus", imageName: "Airbus"),
         Plane(title:"Concorde",imageName: "Concorde")
     ]

@@ -24,16 +24,23 @@ struct ContentView: View {
                    }
                    
                    else{
+                  
                        
-                       Color.white
+                       
                         PlaneList()
+                        
+                    
+                        
+    
+                  
+                   
                    }
                }
                
                CircleTab(index: self.$index)
                
            }
-           .edgesIgnoringSafeArea(.top)
+      
        }
      
 }
@@ -46,58 +53,58 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 struct CircleTab : View {
-     
-     @Binding var index : Int
-     
-     var body : some View{
-         
-         
-         HStack{
-             
-             Button(action: {
-                 
-                 self.index = 0
-                 
-             }) {
-                 
-                 VStack{
-                     
-                     if self.index != 0{
-                         
-                         Image("home").foregroundColor(Color.black.opacity(0.2))
-                     }
-                     else{
-                         
-                         Image("home")
-                             .resizable()
-                             .frame(width: 25, height: 23)
-                             .foregroundColor(.white)
-                             .padding()
-                             .background(Color.black)
-                             .clipShape(Circle())
-                             .offset(y: -20)
-                             .padding(.bottom, -20)
-                         
-                         Text("Home").foregroundColor(Color.black.opacity(0.7))
-                     }
-                 }
-                 
-                 
-             }
-             
-             Spacer(minLength: 15)
-             
-           
-             
-             
-   
-             
-             Button(action: {
-                 
-                 self.index = 1
-                 
-             }) {
-                 
+    
+    @Binding var index : Int
+    
+    var body : some View{
+        
+        
+        HStack{
+            
+            Button(action: {
+                
+                self.index = 0
+                
+            }) {
+                
+                VStack{
+                    
+                    if self.index != 0{
+                        
+                        Image("home").foregroundColor(Color.black.opacity(0.2))
+                    }
+                    else{
+                        
+                        Image("home")
+                            .resizable()
+                            .frame(width: 25, height: 23)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.black)
+                            .clipShape(Circle())
+                            .offset(y: -20)
+                            .padding(.bottom, -20)
+                        
+                        Text("Home").foregroundColor(Color.black.opacity(0.7))
+                    }
+                }
+                
+                
+            }
+            
+            Spacer(minLength: 15)
+            
+            
+            
+            
+            
+            
+            Button(action: {
+                
+                self.index = 1
+                
+            }) {
+                
                 VStack{
                     
                     if self.index != 1{
@@ -119,37 +126,75 @@ struct CircleTab : View {
                         Text("Plane İnformation").foregroundColor(Color.black.opacity(0.7))
                     }
                 }
-             }
-             
-         }.padding(.vertical,-10)
-         .padding(.horizontal, 25)
-         .background(Color.white)
-         .animation(.spring())
-     }
- }
+            }
+            
+        }.padding(.vertical,-10)
+            .padding(.horizontal, 25)
+            .background(Color.white)
+            .animation(.spring())
+    }
+}
 
 
 struct PlaneList: View {
     var body : some View {
-        ScrollView(.horizontal,showsIndicators: false) {
-            HStack {
-                ForEach(Plane.demoPlanes) { plane in
-                    VStack {
-                        Text(plane.title)
-                            .padding([.leading,.top,.trailing])
-                            .multilineTextAlignment(.center)
-                        Image(plane.imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .padding()
+        NavigationView {
+            ZStack {
+                ScrollView(.horizontal,showsIndicators: false) {
+                    HStack {
+                        ForEach(Plane.demoPlanes) { plane in
+                            GeometryReader { proxy in
+                                NavigationLink(destination: PlaneDetailView(plane: plane)) {
+                                    
+                                    VStack {
+                                        Text(plane.title)
+                                            .fontWeight(.bold)
+                                            .font(Font.system(.headline,design: .rounded))
+                                            .padding(.top)
+                                            .minimumScaleFactor(0.75)
+                                            .multilineTextAlignment(.center)
+                                            .foregroundColor(.black)
+                                            
+                                            .multilineTextAlignment(.center)
+                                        Image(plane.imageName)
+                                            
+                                            .resizable()
+                                            .scaledToFit()
+                                            .padding()
+                                            .shadow(color: .gray,radius: 20)
+                                    }
+                                    .padding()
+                                    .frame(width: max(proxy.size.width - proxy.frame(in: .global).midX,proxy.size.width), height: proxy.size.height - 50)
+                                    
+                                    
+                                }
+                                .background(Color.white)
+                                .cornerRadius(10)
+                                .padding()
+                                .shadow(radius: 3)
+                                .layoutPriority(1)
+                                .rotation3DEffect(Angle(degrees: Double(proxy.frame(in: .global).midX) / 40), axis: (x: -4, y: -3, z: -3))
+                                
+                                
+                                
+                                
+                            }
+                            .frame(width: 200, height: 300)
+                        }
                     }
-                    .frame(width: 150, height: 150)
-                    .background(Color.white)
-                .cornerRadius(10)
-                .padding()
-                .shadow(radius: 3)
                 }
+                
+                Spacer()
+                
             }
+            .navigationBarTitle("Plane List")
+                   
         }
+   
+        
+        
+        
+      
+        
     }
 }
