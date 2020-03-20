@@ -157,6 +157,7 @@ struct PlaneList: View {
                                             
                                             .multilineTextAlignment(.center)
                                         Image(plane.imageName)
+                                            .renderingMode(.original)
                                             
                                             .resizable()
                                             .scaledToFit()

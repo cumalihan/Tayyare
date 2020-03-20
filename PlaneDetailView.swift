@@ -14,13 +14,26 @@ struct PlaneDetailView: View {
     
     
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             Text(plane.title)
+                .font(.headline)
+                
             
             Image(plane.imageName)
                 .resizable()
+                .scaledToFit()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 200, height: 200)
+                .frame(width: 300, height: 300)
+                
+            
+            ScrollView(.vertical){
+            Text(plane.detail)
+                .multilineTextAlignment(.center)
+                .truncationMode(.middle)
+                .padding(13)
+                Spacer()
+            }
+      
         }
         
     }
