@@ -9,42 +9,44 @@
 import SwiftUI
 
 struct ContentView: View {
-       @State var index = 0
-       
-       var body: some View {
-           
-           VStack(spacing: 0){
-               
-               ZStack{
-                   
-                   if self.index == 0{
-                       Text("This is your home")
-                       Color.black.opacity(0.05)
-                        
-                   }
-                   
-                   else{
-                  
-                       
-                       
-                        PlaneList()
-                        
-                    
-                        
+    @State var index = 0
+    @State var loginPage = 0
+ 
     
-                  
-                   
-                   }
-               }
-               
-               CircleTab(index: self.$index)
-               
-           }
+    var body: some View {
+        
+        VStack {
+            if loginPage == 1 {
+                
+                VStack {
+                    ZStack{
+                        
+                        if self.index == 0{
+                            Text("This is your home")
+                                .padding()
+                        }
+                            
+                        else{
+                            
+                            PlaneList()
+                            
+                        }
+                    }
+                    
+                    CircleTab(index: self.$index)
+                    
+                }
+            } else {
+                LoginPage()
+            }
+        }
+        
       
-       }
-     
+        
+        
+    }
+    
 }
-
 
 
 struct ContentView_Previews: PreviewProvider {
@@ -93,12 +95,7 @@ struct CircleTab : View {
             }
             
             Spacer(minLength: 15)
-            
-            
-            
-            
-            
-            
+  
             Button(action: {
                 
                 self.index = 1
@@ -134,7 +131,6 @@ struct CircleTab : View {
             .animation(.spring())
     }
 }
-
 
 struct PlaneList: View {
     var body : some View {
@@ -175,10 +171,7 @@ struct PlaneList: View {
                                 .shadow(radius: 3)
                                 .layoutPriority(1)
                                 .rotation3DEffect(Angle(degrees: Double(proxy.frame(in: .global).midX) / 40), axis: (x: -4, y: -3, z: -3))
-                                
-                                
-                                
-                                
+                     
                             }
                             .frame(width: 200, height: 300)
                         }
@@ -189,13 +182,10 @@ struct PlaneList: View {
                 
             }
             .navigationBarTitle("Plane List")
-                   
+            
         }
-   
-        
-        
-        
-      
         
     }
 }
+
+

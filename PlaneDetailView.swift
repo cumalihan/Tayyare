@@ -17,9 +17,8 @@ struct PlaneDetailView: View {
         VStack(alignment: .center) {
             Text(plane.title)
                 .font(.headline)
-                
-            
-            Image(plane.imageName)
+             
+            Image(plane.imageDetail)
                 .resizable()
                 .scaledToFit()
                 .aspectRatio(contentMode: .fit)
@@ -30,7 +29,8 @@ struct PlaneDetailView: View {
             Text(plane.detail)
                 .multilineTextAlignment(.center)
                 .truncationMode(.middle)
-                .padding(13)
+                .padding()
+                .padding()
                 Spacer()
             }
       
