@@ -22,7 +22,7 @@ struct ContentView: View {
                     ZStack{
                         
                         if self.index == 0{
-                            Text("This is your home")
+                            MyFlights()
                                 .padding()
                         }
                             
@@ -37,7 +37,7 @@ struct ContentView: View {
                     
                 }
             } else {
-                LoginPage()
+                LoginPage(loginPage: self.$loginPage)
             }
         }
         
@@ -154,7 +154,6 @@ struct PlaneList: View {
                                             .multilineTextAlignment(.center)
                                         Image(plane.imageName)
                                             .renderingMode(.original)
-                                            
                                             .resizable()
                                             .scaledToFit()
                                             .padding()
@@ -165,12 +164,13 @@ struct PlaneList: View {
                                     
                                     
                                 }
-                                .background(Color.white)
+                                .background(Color("LightShadow"))
                                 .cornerRadius(10)
                                 .padding()
-                                .shadow(radius: 3)
+                                .shadow(radius: 15)
                                 .layoutPriority(1)
                                 .rotation3DEffect(Angle(degrees: Double(proxy.frame(in: .global).midX) / 40), axis: (x: -4, y: -3, z: -3))
+                                .shadow(color: Color("LightShadow"), radius: 20, x: -8, y: -8)
                      
                             }
                             .frame(width: 200, height: 300)

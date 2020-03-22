@@ -23,6 +23,7 @@ struct PlaneDetailView: View {
                 .scaledToFit()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 300, height: 300)
+            
                 
             
             ScrollView(.vertical){

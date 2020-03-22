@@ -17,8 +17,7 @@ struct LoginPage: View {
     let storedUsername = "Username"
     let storedPassword = "Password"
     @State var editingMode: Bool = false
-    
-  
+    @Binding var loginPage: Int
     @State var authenticationDidFail: Bool = false
     @State var authenticationDidSucced: Bool = false
     var body: some View {
@@ -38,6 +37,7 @@ struct LoginPage: View {
                     if self.username == self.storedUsername && self.password == self.storedPassword {
                         self.authenticationDidSucced = true
                         self.authenticationDidFail = false
+                        self.loginPage = 1
                         
                     }else {
                         self.authenticationDidFail = true
@@ -65,7 +65,7 @@ struct LoginPage: View {
 
 struct LoginPage_Previews: PreviewProvider {
     static var previews: some View {
-        LoginPage()
+        ContentView()
     }
 }
 
