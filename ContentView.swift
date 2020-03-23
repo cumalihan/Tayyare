@@ -25,10 +25,15 @@ struct ContentView: View {
                             MyFlights()
                                 .padding()
                         }
+                        if self.index == 1 {
+                              PlaneList()
+                        }
                             
-                        else{
                             
-                            PlaneList()
+                        if self.index == 2{
+                            
+                          Text("Airport Information")
+                            Color.black.opacity(0.05)
                             
                         }
                     }
@@ -73,7 +78,11 @@ struct CircleTab : View {
                     
                     if self.index != 0{
                         
-                        Image("home").foregroundColor(Color.black.opacity(0.2))
+                        Image("home")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50,height: 50)
+                            .foregroundColor(Color.black.opacity(0.2))
                     }
                     else{
                         
@@ -102,11 +111,18 @@ struct CircleTab : View {
                 
             }) {
                 
+                
                 VStack{
                     
                     if self.index != 1{
                         
-                        Image("plane").foregroundColor(Color.black.opacity(0.2))
+                        Image("plane")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 80,height: 80)
+                            .foregroundColor(Color.black.opacity(0.2))
+                        
+                        
                     }
                     else{
                         
@@ -119,11 +135,50 @@ struct CircleTab : View {
                             .clipShape(Circle())
                             .offset(y: -20)
                             .padding(.bottom, -20)
-                        
-                        Text("Plane İnformation").foregroundColor(Color.black.opacity(0.7))
+                    
+                        Text("Plane Information").foregroundColor(Color.black.opacity(0.7))
                     }
                 }
+                
             }
+            
+            Spacer(minLength: 15)
+            
+            Button(action: {
+                
+                self.index = 2
+                
+            }) {
+                VStack{
+                    
+                    if self.index != 2{
+                        
+                        Image("airport")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 50,height: 50)
+                            .foregroundColor(Color.black.opacity(0.2))
+                        
+                        
+                    }
+                    else{
+                        
+                        Image("airport")
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.black)
+                            .clipShape(Circle())
+                            .offset(y: -20)
+                            .padding(.bottom, -20)
+                        
+                        Text("Airport Information").foregroundColor(Color.black.opacity(0.7))
+                    }
+                }
+                
+            }
+            
             
         }.padding(.vertical,-10)
             .padding(.horizontal, 25)
@@ -157,7 +212,7 @@ struct PlaneList: View {
                                             .resizable()
                                             .scaledToFit()
                                             .padding()
-                                            .shadow(color: .gray,radius: 20)
+                                            .shadow(color: .gray,radius: 5)
                                     }
                                     .padding()
                                     .frame(width: max(proxy.size.width - proxy.frame(in: .global).midX,proxy.size.width), height: proxy.size.height - 50)
@@ -170,7 +225,7 @@ struct PlaneList: View {
                                 .shadow(radius: 15)
                                 .layoutPriority(1)
                                 .rotation3DEffect(Angle(degrees: Double(proxy.frame(in: .global).midX) / 40), axis: (x: -4, y: -3, z: -3))
-                                .shadow(color: Color("LightShadow"), radius: 20, x: -8, y: -8)
+                                .shadow(color: Color("LightShadow"), radius: 10, x: -8, y: -8)
                      
                             }
                             .frame(width: 200, height: 300)

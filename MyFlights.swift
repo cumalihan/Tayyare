@@ -31,24 +31,38 @@ struct MyFlights: View {
         self.newTaskTitle = ""
     }
     
-   
+    func  markTaskAsDone (at index: Int) {
+        let item = fetchedItems[index]
+        item.taskDone = true
+        
+        do {
+            try self.managedObjectContext.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+    }
     
     var rowHeight: CGFloat = 50
     var body: some View {
-        NavigationView {
+        
+        NavigationView() {
             List {
                 ForEach(fetchedItems, id: \.self) { item in
                     
                     HStack {
                         Text(item.taskTitle ?? "Empty")
                         Spacer()
-                        
-                        Button(action: {print("Task done.")}) {
-                            Image(systemName: "circle")
-                                .imageScale(.large)
-                                .foregroundColor(.black)
+                        NavigationLink(destination: FlightsDone()){
+                            Button(action: {self.markTaskAsDone(at: self.fetchedItems.firstIndex(of: item)!)}) {
+                                Image(systemName: "circle")
+                                    .imageScale(.large)
+                                    .foregroundColor(.black)
+                            }
                         }
                     }
+                    
+                    
                     
                 }
                 HStack {
@@ -60,9 +74,12 @@ struct MyFlights: View {
                 }
                 .frame(height: rowHeight)
                 .navigationBarTitle(Text("My Flights"))
+                
             }
         }
         
+        
+    
         
         
     }
@@ -70,9 +87,11 @@ struct MyFlights: View {
     
     
     struct MyFlights_Previews: PreviewProvider {
+        
         static var previews: some View {
-            MyFlights()
-        }
-    }
+            let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+            return MyFlights().environment(\.managedObjectContext, context)
+            
+        }    }
     
 }
