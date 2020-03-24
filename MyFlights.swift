@@ -53,27 +53,33 @@ struct MyFlights: View {
                     HStack {
                         Text(item.taskTitle ?? "Empty")
                         Spacer()
-                        NavigationLink(destination: FlightsDone()){
+                       
                             Button(action: {self.markTaskAsDone(at: self.fetchedItems.firstIndex(of: item)!)}) {
                                 Image(systemName: "circle")
                                     .imageScale(.large)
                                     .foregroundColor(.black)
                             }
-                        }
+                        
                     }
                     
                     
                     
                 }
                 HStack {
-                    TextField("Add Task...",text: $newTaskTitle,onCommit: {self.saveTask()})
+                    TextField("Enter your PNR",text: $newTaskTitle,onCommit: {self.saveTask()})
                     Button(action: {self.saveTask()}) {
                         Image(systemName: "plus")
                             .imageScale(.large)
                     }
                 }
-                .frame(height: rowHeight)
-                .navigationBarTitle(Text("My Flights"))
+                HStack {
+                    NavigationLink(destination: FlightsDone()) {
+                         Text("Flights done")
+                        .frame(height: rowHeight)
+                    }
+                    .frame(height: rowHeight)
+                    .navigationBarTitle(Text("My Flights"))
+                }
                 
             }
         }
