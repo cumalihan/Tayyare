@@ -14,6 +14,7 @@ let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255
 struct LoginPage: View {
     @State var username = ""
     @State var password = ""
+    @State var isPresented = false
     let storedUsername = "Username"
     let storedPassword = "Password"
     @State var editingMode: Bool = false
@@ -45,19 +46,23 @@ struct LoginPage: View {
                     }) {
                     LoginButtonContent()
                  }
+                .padding()
+                Button(action: {
+                    self.isPresented.toggle()
+                },label: {
+                    Text("Sign Up")
+                })
+                    .sheet(isPresented: self.$isPresented, content: {
+                        RegisterPage()
+                    })
+                           
 
             }
-            .padding()
-            if authenticationDidSucced {
-                Text("Login Successful")
-                    .font(.headline)
-                    .frame(width: 250, height: 80)
-                    .background(Color.black)
-                    .cornerRadius(20.0)
-                    .foregroundColor(.white)
-                    .animation(Animation.default)
-            }
+                
+        
+         
         }
+            
         .offset(y:editingMode ? -150 : 0)
        
     }
