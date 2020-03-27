@@ -47,18 +47,21 @@ struct LoginPage: View {
                     LoginButtonContent()
                  }
                 .padding()
-                Button(action: {
-                    self.isPresented.toggle()
-                },label: {
-                    Text("Sign Up")
-                })
-                    .sheet(isPresented: self.$isPresented, content: {
-                        RegisterPage()
+                HStack {
+                    Text("I'm new user.")
+                    Button(action: {
+                        self.isPresented.toggle()
+                    },label: {
+                        Text("Create an account")
                     })
-                           
-
+                        .sheet(isPresented: self.$isPresented, content: {
+                            RegisterPage()
+                        })
+                    
+                    
+                }
             }
-                
+            
         
          
         }
