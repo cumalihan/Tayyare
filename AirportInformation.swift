@@ -9,29 +9,62 @@
 import SwiftUI
 
 struct AirportInformation: View {
-    @State private var countryIndex = 0
-    var countries = ["Germany","Italy","Turkey","UK"]
-    var body: some View {
-        NavigationView {
-            Form {
-                Section {
-                    Picker(selection: $countryIndex, label: Text("Country")) {
-                        ForEach(0 ..< countries.count) {
-                            Text(self.countries[$0]).tag($0)
-                        }
-                        
-                    }
-                }
-            }.navigationBarTitle(Text("Airport Information"))
-            
-        }
-        
-    }
+    @State var txt = ""
     
+    var body: some View {
+        ZStack {
+            Color(.clear).edgesIgnoringSafeArea(.all)
+            SearchView(txt: $txt,data: data)
+        }
+    }
 }
 
 struct AirportInformation_Previews: PreviewProvider {
     static var previews: some View {
         AirportInformation()
     }
+}
+
+
+
+struct  SearchView: View {
+    @Binding var txt : String
+    var data : [String]
+    var body : some View {
+        VStack(spacing: 0) {
+            ZStack {
+                HStack {
+                    TextField("Please Enter Airport Name",text: $txt)
+                        .padding(.trailing, 75)
+                    
+                }.padding()
+                    .background(Color.white)
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.txt = ""
+                        
+                    }) {
+                        Text("Cancel")
+                    }.foregroundColor(.black)
+                }.padding()
+                
+            }
+            
+          
+            List(self.data.filter{$0.lowercased().contains(self.txt.lowercased())},id: \.self) { i in
+                
+                Text(i)
+                
+            }.frame(height: 500)
+            
+            
+            
+            
+        }.padding()
+        
+        
+        
+    }
+
 }
