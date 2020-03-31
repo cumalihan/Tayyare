@@ -27,13 +27,15 @@ struct ContentView: View {
                         }
                         if self.index == 1 {
                               PlaneList()
+                            
                         }
                             
                             
                         if self.index == 2{
                             
-                          Text("Airport Information")
-                            Color.black.opacity(0.05)
+                          AirportInformation()
+                            .padding()
+                           
                             
                         }
                     }
