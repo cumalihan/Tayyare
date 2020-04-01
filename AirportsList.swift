@@ -8,14 +8,16 @@
 
 import Foundation
 
+struct AirportsList: Identifiable {
+    var id = UUID()
+    var title: String
+    
+}
 
-var data = [
-    "Şakirpaşa Havalimanı",
-    "Ankara Esenboğa Havalimanı",
-    "Hatay Havalimanı",
-    "Antalya Havalimanı",
-    "Milas-Bodrum Havalimanı",
-    "Dalaman Havalimanı",
-    "Diyarbakır Havalimanı",
-    "Erzurum Havalimanı"
-]
+extension AirportsList {
+    static let demoAirports = [
+        
+        AirportsList(title: "Adana Airport"),
+        AirportsList(title: "Malatya Airport"),
+    ]
+}

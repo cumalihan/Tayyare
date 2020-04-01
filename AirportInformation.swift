@@ -9,19 +9,34 @@
 import SwiftUI
 
 struct AirportInformation: View {
+    var airport : AirportsList
     @State var txt = ""
     
     var body: some View {
         ZStack {
             Color(.clear).edgesIgnoringSafeArea(.all)
-            SearchView(txt: $txt,data: data)
+            VStack {
+                ForEach(AirportsList.demoAirports) { airport in
+                    HStack {
+                        Text(airport.title)
+                            .fontWeight(.bold)
+                            .font(Font.system(.headline,design: .rounded))
+                            .padding(.top)
+                            .minimumScaleFactor(0.75)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.black)
+                        
+                    }
+                }
+            }
+            
         }
     }
 }
 
 struct AirportInformation_Previews: PreviewProvider {
     static var previews: some View {
-        AirportInformation()
+        AirportInformation(airport: AirportsList.demoAirports.randomElement()!)
     }
 }
 
@@ -54,7 +69,14 @@ struct  SearchView: View {
           
             List(self.data.filter{$0.lowercased().contains(self.txt.lowercased())},id: \.self) { i in
                 
-                Text(i)
+                Button(action: {
+                    NavigationView {
+                        AirportsDetailView()
+                    }
+                    
+                }) {
+                    Text(i)
+                }.foregroundColor(.black)
                 
             }.frame(height: 500)
             
