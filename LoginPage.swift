@@ -15,8 +15,8 @@ struct LoginPage: View {
     @State var username = ""
     @State var password = ""
     @State var isPresented = false
-    let storedUsername = "Username"
-    let storedPassword = "Password"
+    let storedUsername = "1"
+    let storedPassword = "1"
     @State var editingMode: Bool = false
     @Binding var loginPage: Int
     @State var authenticationDidFail: Bool = false

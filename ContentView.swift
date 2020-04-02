@@ -33,7 +33,7 @@ struct ContentView: View {
                             
                         if self.index == 2{
                             
-                            AirportInformation(airport: AirportsList.demoAirports.randomElement()!)
+                            AirportInformation()
                                 .padding()
                             
                             
