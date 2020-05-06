@@ -12,7 +12,7 @@ struct NewLogin: View {
     var body: some View {
         ZStack {
             PlayerView()
-                .overlay(Color.green.opacity(0.4))
+                .overlay(Color.black.opacity(0.4))
                 .blur(radius: 1)
                 .edgesIgnoringSafeArea(.all)
             VStack {

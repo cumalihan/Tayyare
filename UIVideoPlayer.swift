@@ -15,7 +15,7 @@ class UIVideoPlayer: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-          guard let url = URL(string: "") else { return }
+          guard let url = URL(string: "https://github.com/cumalihan/Tayyare/blob/master/Base.lproj/airplane.mp4?raw=true") else { return }
         let player = AVPlayer(url: url)
         player.isMuted = true
         player.play()
